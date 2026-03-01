@@ -11,6 +11,9 @@ data/
 # Models
 models/
 
+# Training outputs
+notebooks/results/
+
 # Environment
 venv/
 .env
