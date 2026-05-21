@@ -128,7 +128,7 @@ h1,h2,h3 {
 def load_personality_model():
     tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
     model = AutoModelForSequenceClassification.from_pretrained(
-        "notebooks/results/checkpoint-1534"
+        "KhushiPanwar/mbti-career-model"
     )
     model.eval()
     return tokenizer, model
