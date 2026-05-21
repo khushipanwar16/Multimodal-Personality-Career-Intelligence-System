@@ -2,6 +2,7 @@ streamlit
 torch
 transformers
 sentence-transformers
+torchvision
 plotly
 pandas
 scikit-learn
