@@ -157,7 +157,7 @@ def load_embedding_model():
 
 embed_model = load_embedding_model()
 
-career_df = pd.read_csv("career_data.csv")
+career_df = pd.read_csv("data/career_dataset/career_data.csv")
 
 @st.cache_resource
 def get_career_embeddings():
