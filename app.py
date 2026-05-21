@@ -1,4 +1,4 @@
-from deepface import DeepFace
+# from deepface import DeepFace
 import numpy as np
 import streamlit as st
 import torch
@@ -157,7 +157,7 @@ def load_embedding_model():
 
 embed_model = load_embedding_model()
 
-career_df = pd.read_csv("data/career_dataset/career_data.csv")
+career_df = pd.read_csv("career_data.csv")
 
 @st.cache_resource
 def get_career_embeddings():
@@ -168,6 +168,8 @@ career_embeddings = get_career_embeddings()
 # ---------------------------------------------------
 # CORE LOGIC
 # ---------------------------------------------------
+def analyze_image(image_file):
+    return torch.tensor([0.125]*8)
 
 def predict_personality(text):
 
@@ -194,33 +196,8 @@ def recommend_careers(user_text, top_k=5):
     recommendations = career_df.iloc[top_indices]["career"].tolist()
     return recommendations, top_indices
 
-def analyze_image(image_file):
 
-    try:
-        result = DeepFace.analyze(
-            img_path=image_file,
-            actions=["emotion"],
-            enforce_detection=False
-        )
 
-        emotion = result[0]["dominant_emotion"]
-
-        emotion_map = {
-            "happy": [0.25,0.2,0.1,0.15,0.1,0.05,0.1,0.05],
-            "neutral":[0.1,0.1,0.15,0.1,0.2,0.2,0.1,0.05],
-            "sad":[0.05,0.05,0.25,0.2,0.15,0.15,0.1,0.05],
-            "angry":[0.05,0.2,0.05,0.05,0.2,0.2,0.1,0.15]
-        }
-
-        probs = emotion_map.get(
-            emotion,
-            [0.125]*8
-        )
-
-        return torch.tensor(probs)
-
-    except:
-        return torch.tensor([0.125]*8)
 def is_valid_input(text):
 
     words = text.split()
